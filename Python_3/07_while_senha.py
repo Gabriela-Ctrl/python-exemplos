@@ -1,18 +1,18 @@
-i= 1
-while i <= 3:
+i = 1
+while i <= 3: 
 
     user = input("Informe o usuário: ")
     senha = input("Informe a senha: ")
 
-# checagem
+    # Checagem
     if user != "Gisele" and senha != "123":
-        print("usuário ou Senha incorretos!")
-        print(" ")
         i += 1
+        print("Usuário ou Senha incorretos!")
+        print(" ")
     else:
         print(" ")
         print(f"Bem-Vindo, {user}!")
-        break
-      
-else:
-    print(f"Você excedeu todas as: {i-1} tentativas")
+        break # Encerra ao inserir a senha correta
+
+else: 
+    print(f"Você excedeu todas as: {i-1} tentativas!!")
