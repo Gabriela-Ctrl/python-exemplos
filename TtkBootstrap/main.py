@@ -1,3 +1,4 @@
+
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 import os
@@ -41,28 +42,27 @@ class FormularioInscricao:
         self.nome_entry = ttk.Entry(self.frame, width=50)
         self.nome_entry.pack(fill=X)
         
-        
         # Campo Email
         ttk.Label(self.frame, text="Email").pack(anchor=W, pady=(10, 0))
         self.email_entry = ttk.Entry(self.frame, width=50)
         self.email_entry.pack(fill=X)
-        
-        
+
         # Campo Idade
         ttk.Label(self.frame, text="Idade").pack(anchor=W, pady=(10, 0))
         self.idade_entry = ttk.Entry(self.frame, width=50)
         self.idade_entry.pack(fill=X)
         
-        
         # Frame para Checkbox e ComboBox
         self.opcoes_frame = ttk.Frame(self.frame)
         self.opcoes_frame.pack(fill=X, pady=10)
-        
-        # CheckBox Lembrar dados
+
+        # Checkbox Lembrar dados
         self.lembrar_var = ttk.BooleanVar()
-        self.lembrar_check = ttk.Checkbutton(self.opcoes_frame, text="Lembrar dados?", variable=self.lembrar_var, 
+        self.lembrar_check =ttk.Checkbutton(self.opcoes_frame,
+        text="Lembrar dados?", variable=self.lembrar_var,
         bootstyle="round-toggle")
-        self.lembrar_check.pack("side=LEFT") 
+        self.lembrar_check.pack(side=LEFT)
+
         
         # ComboBox para seleção de temas
         self.tema_var = ttk.StringVar()
@@ -79,12 +79,11 @@ class FormularioInscricao:
         # Botão Enviar
         self.enviar_btn = ttk.Button(self.botoes_frame, text="Enviar", bootstyle="success", command=self.enviar)
         self.enviar_btn.pack(side=LEFT, expand=True)
-        
+
         # Botão Cancelar
         self.cancelar_btn = ttk.Button(self.botoes_frame, text="Cancelar", bootstyle="danger", command=self.cancelar)
         self.cancelar_btn.pack(side=RIGHT, expand=True)
         
-
         
         # Frame para exibir os dados coletados
         self.dados_frame = ttk.Frame(self.frame)
@@ -104,6 +103,7 @@ class FormularioInscricao:
         self.lembrar_label.pack(fill=X)
         
 
+
     def set_icon(self):
         icon_ico = resource_path("logo.ico")
         icon_png = resource_path("logo.png")
@@ -116,19 +116,32 @@ class FormularioInscricao:
             self.master.iconphoto(True, logo)
         else:
             print("Arquivo de ícone não encontrado.")
-    
+
+    def enviar(self):
+        # Atualiza a labels com os dados coletados
+        self.nome_label.config(text=f"Nome: {self.nome_entry.get()}")
+        self.email_label.config(text=f"Email: {self.email_entry.get()}")
+        self.idade_label.config(text=f"Idade: {self.idade_entry.get()}")
+
+        # Atualiza o status do CheckBox (Lembrar Dados)
+        self.lembrar_label.config(text=f"Lembrar dados: {'Sim' if self.lembrar_var.get() else 'Não'}")
+        
     def cancelar(self):
-    #Limpa os campos de entrada e as labels
-        self.nome_entry.delete(0, END) 
-        self.email_entry.delete(0, END) 
-        self.idade_entry.delete(0, END) 
-        self.lembrar_var.set(False) 
+        # Limpa campos de entrada e labels
+        self.nome_entry.delete(0, END)
+        self.email_entry.delete(0, END)
+        self.idade_entry.delete(0, END)
+        self.lembrar_var.set(False)
 
-        self.nome_label.config(text="") 
-        self.email_label.config(text="") 
-        self.idade_label.config(text="") 
-        self.lembrar_label.config(text="") 
+        self.nome_label.config(text="")
+        self.email_label.config(text="")
+        self.idade_label.config(text="")
+        self.lembrar_label.config(text="")
 
+    def mudar_tema(self, event):
+        # Função para mudar o tema (Quando um novo é selecionado no ComboBox)
+        novo_tema = self.tema_var.get()
+        self.style.theme_use(novo_tema)
 
 if __name__ == "__main__":
     root = ttk.Window()
