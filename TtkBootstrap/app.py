@@ -82,7 +82,7 @@ class FormularioInscricao:
         
         # Botão Cancelar
         self.cancelar_btn = ttk.Button(self.botoes_frame, text="Cancelar", bootstyle="success", command=self.cancelar)
-        self.cancelar_btn.pack(side=LEFT, expand=True)
+        self.cancelar_btn.pack(side=RIGHT, expand=True)
         
 
         
